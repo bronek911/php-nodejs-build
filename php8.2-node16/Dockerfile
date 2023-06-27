@@ -29,15 +29,15 @@ RUN apt-get clean && \
     LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php && apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --force-yes \
         imagemagick \
-        ##php-packages## \
+        php8.2 php8.2-amqp php8.2-apcu php8.2-bcmath php8.2-bz2 php8.2-cgi php8.2-cli php8.2-common php8.2-curl php8.2-dev php8.2-gd php8.2-gmp php8.2-imagick php8.2-imap php8.2-intl php8.2-ldap php8.2-mailparse php8.2-mbstring php8.2-memcached php8.2-mysql php8.2-odbc php8.2-opcache php8.2-pgsql php8.2-pspell php8.2-readline php8.2-redis php8.2-snmp php8.2-soap php8.2-sqlite3 php8.2-tidy php8.2-uuid php8.2-xml php8.2-xsl php8.2-yaml php8.2-zip php8.2-zmq \
         php-mail && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN curl -sL https://deb.nodesource.com/setup_##node-version##.x | sudo -E bash -
+RUN curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
 RUN sudo apt-get install -y nodejs
 
 # set php version as active
-RUN update-alternatives --set php "/usr/bin/php##php-version##"
+RUN update-alternatives --set php "/usr/bin/php8.2"
 
 # add www-data to sudoers
 COPY ./sudoers /etc/sudoers.d/www-data

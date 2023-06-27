@@ -22,17 +22,22 @@ RUN apt-get clean && \
         dnsutils \
         unzip \
         rsync \
+        nodejs \
+        npm \
         inetutils-ping && \
     locale-gen en_US.UTF-8 && \
     LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php && apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --force-yes \
         imagemagick \
-        php7.2 php7.2-amqp php7.2-apcu php7.2-apcu-bc php7.2-bcmath php7.2-bz2 php7.2-cgi php7.2-cli php7.2-common php7.2-curl php7.2-dev php7.2-gd php7.2-gmp php7.2-imagick php7.2-imap php7.2-intl php7.2-json php7.2-ldap php7.2-mailparse php7.2-mbstring php7.2-memcache php7.2-memcached php7.2-mongodb php7.2-mysql php7.2-odbc php7.2-opcache php7.2-pgsql php7.2-pspell php7.2-readline php7.2-recode php7.2-redis php7.2-snmp php7.2-soap php7.2-sqlite3 php7.2-tideways php7.2-tidy php7.2-uuid php7.2-xml php7.2-xmlrpc php7.2-xsl php7.2-yaml php7.2-zip php7.2-zmq \
+        php8.0 php8.0-amqp php8.0-apcu php8.0-bcmath php8.0-bz2 php8.0-cgi php8.0-cli php8.0-common php8.0-curl php8.0-dev php8.0-gd php8.0-gmp php8.0-imagick php8.0-imap php8.0-intl php8.0-ldap php8.0-mailparse php8.0-mbstring php8.0-memcached php8.0-mysql php8.0-odbc php8.0-opcache php8.0-pgsql php8.0-pspell php8.0-readline php8.0-redis php8.0-snmp php8.0-soap php8.0-sqlite3 php8.0-tidy php8.0-uuid php8.0-xml php8.0-xsl php8.0-yaml php8.0-zip php8.0-zmq \
         php-mail && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+RUN curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+RUN sudo apt-get install -y nodejs
+
 # set php version as active
-RUN update-alternatives --set php "/usr/bin/php7.2"
+RUN update-alternatives --set php "/usr/bin/php8.0"
 
 # add www-data to sudoers
 COPY ./sudoers /etc/sudoers.d/www-data
@@ -56,9 +61,6 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
     apt-get -y update && \
     apt-get install -y --no-install-recommends yarn && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-# install nvm
-RUN sudo -i -u www-data sh -c 'curl -sL -o- "https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.0/install.sh" | bash'
 
 # this lets us make our build behave differently if needed
 ENV DOCKER="yes"
