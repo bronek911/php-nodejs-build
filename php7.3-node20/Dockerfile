@@ -29,15 +29,15 @@ RUN apt-get clean && \
     LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php && apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --force-yes \
         imagemagick \
-        php8.2 php8.2-amqp php8.2-apcu php8.2-bcmath php8.2-bz2 php8.2-cgi php8.2-cli php8.2-common php8.2-curl php8.2-dev php8.2-gd php8.2-gmp php8.2-imagick php8.2-imap php8.2-intl php8.2-ldap php8.2-mailparse php8.2-mbstring php8.2-memcached php8.2-mysql php8.2-odbc php8.2-opcache php8.2-pgsql php8.2-pspell php8.2-readline php8.2-redis php8.2-snmp php8.2-soap php8.2-sqlite3 php8.2-tidy php8.2-uuid php8.2-xml php8.2-xsl php8.2-yaml php8.2-zip php8.2-zmq \
+        php7.3 php7.3-amqp php7.3-apcu php7.3-apcu-bc php7.3-bcmath php7.3-bz2 php7.3-cgi php7.3-cli php7.3-common php7.3-curl php7.3-dev php7.3-gd php7.3-gmp php7.3-imagick php7.3-imap php7.3-intl php7.3-json php7.3-ldap php7.3-mailparse php7.3-mbstring php7.3-memcache php7.3-memcached php7.3-mongodb php7.3-mysql php7.3-odbc php7.3-opcache php7.3-pgsql php7.3-pspell php7.3-readline php7.3-recode php7.3-redis php7.3-snmp php7.3-soap php7.3-sqlite3 php7.3-tideways php7.3-tidy php7.3-uuid php7.3-xml php7.3-xmlrpc php7.3-xsl php7.3-yaml php7.3-zip php7.3-zmq \
         php-mail && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+RUN curl -sL https://deb.nodesource.com/setup_20.x | sudo -E bash -
 RUN sudo apt-get install -y nodejs
 
 # set php version as active
-RUN update-alternatives --set php "/usr/bin/php8.2"
+RUN update-alternatives --set php "/usr/bin/php7.3"
 
 # add www-data to sudoers
 COPY ./sudoers /etc/sudoers.d/www-data

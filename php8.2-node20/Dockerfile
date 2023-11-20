@@ -33,7 +33,7 @@ RUN apt-get clean && \
         php-mail && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+RUN curl -sL https://deb.nodesource.com/setup_20.x | sudo -E bash -
 RUN sudo apt-get install -y nodejs
 
 # set php version as active

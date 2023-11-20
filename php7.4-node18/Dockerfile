@@ -1,6 +1,6 @@
 FROM ubuntu:22.04
 
-MAINTAINER Tin Benjamin Matuka <mail@tbmatuka.com>
+MAINTAINER Michał Bronowski <mb@hxs.pl>
 
 # set up timezone
 ENV TIMEZONE="UTC"
